@@ -8,7 +8,7 @@ import { useStore, MEMBERS } from '../store.jsx';
 import { isResponded, isRequired } from '../store.jsx';
 import { INTRO_MESSAGES, TRAILING_MESSAGES, TODAY_LABEL, HINTS, COMPOSE_HINT } from '../data.js';
 import { SchedulingBubble } from './bubbles.jsx';
-import { Avatar, IconBack, IconSettings, IconSend } from './primitives.jsx';
+import { Avatar, IconBack, IconSettings, IconSend, IconPin } from './primitives.jsx';
 import Sheet from './Sheet.jsx';
 
 /* 타겟 푸시 계산 — 응답을 마친 사람에게는 아무것도 가지 않는다 */
@@ -76,8 +76,9 @@ export default function ChatRoom() {
           className="pinbar"
           onClick={() => document.getElementById('scheduling-bubble')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
         >
+          <IconPin />
           <span className="pinbar__text">
-            📌 {state.meeting.title} — {state.mode === 'coordination' || state.mode === 'noslot' ? '조율 중' : '확인 대기'}
+            {state.meeting.title} — {state.mode === 'coordination' || state.mode === 'noslot' ? '조율 중' : '확인 대기'}
           </span>
           <span className="pinbar__cta">보기</span>
         </button>
@@ -114,7 +115,9 @@ export default function ChatRoom() {
 
       {hint && (
         <div className="hintbar">
-          <span>💡 {hint}</span>
+          <span>
+            <em className="hintbar__badge">TIP</em> {hint}
+          </span>
           <button type="button" onClick={() => dispatch({ type: 'TOGGLE_HINT' })}>
             숨기기
           </button>
