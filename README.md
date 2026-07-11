@@ -3,6 +3,7 @@
 **modu** = 모두(everyone), 그리고 **Mod U** — 회의를 잡는 방식을 개조하다.
 침묵은 동의다(tacit consent). 아무도 응답하지 않아도 회의가 확정되는, 팀 채팅방 안의 일정 시스템.
 토스 2026 프로덕트 디자이너 챌린지 제출용 인터랙티브 프로토타입입니다.
+[피그마 링크](https://www.figma.com/design/ADGZA9in8smWNHWctdr4ao/%EB%AA%A8%EB%91%90%EC%9D%98-%EC%8B%9C%EA%B0%84--Mod-U-?node-id=0-1&t=CZLdYDLyUwqfK2up-1) | [프로토타입 배포 링크](runauxlabs.github.io/modu/)
 
 ## 실행
 
