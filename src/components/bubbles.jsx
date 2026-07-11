@@ -54,6 +54,9 @@ export function ProposalBubble() {
   return (
     <BubbleShell title={`${state.meeting.title} · ${state.meeting.duration}`} subtitle="캘린더와 회의룸이 모두 비는 시간으로 잡았어요">
       <SlotCard slot={PROPOSAL_SLOT} variant="hero" />
+      <Notice tone="weak">
+        여섯 명의 캘린더와 회의룸이 모두 비는 시간 중 가장 이른 시간이에요. 캘린더에 없는 사정이 있다면 알려주세요.
+      </Notice>
       <Notice tone="neutral">
         어려우면 <b>{state.meeting.deadline}</b>까지 알려주세요. 이의가 없으면 그대로 확정돼요.
       </Notice>
@@ -190,7 +193,7 @@ export function ConfirmedBubble() {
       : `조율 영수증 — 단체방 독촉 0회, 개인 리마인드 ${state.phase >= 2 ? 1 : 0}회, 재요청 ${reRequests}회`
 
   return (
-    <BubbleShell title="회의가 확정됐어요 🎉" subtitle={via === 'layer1' ? '이의 없이 그대로 확정됐어요' : '조율 결과로 확정됐어요'}>
+    <BubbleShell title="회의가 확정됐어요" subtitle={via === 'layer1' ? '이의 없이 그대로 확정됐어요' : '조율 결과로 확정됐어요'}>
       <SlotCard slot={slot} variant="hero" />
       <div className="confirm__people">
         <span className="confirm__label">참석 {attendees.length}</span>
