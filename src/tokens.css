@@ -36,12 +36,12 @@
    --blue-600: #1b64da;
 
    /* User Colors — 아바타 6색 (인덱스 round-robin). DS: primitive/user/1~6 */
-   --user-color-1: #3182f6;
-   --user-color-2: #7048e8;
-   --user-color-3: #0ca678;
-   --user-color-4: #f59f00;
-   --user-color-5: #e64980;
-   --user-color-6: #495057;
+   --user-1: #3182f6;
+   --user-2: #7048e8;
+   --user-3: #0ca678;
+   --user-4: #f59f00;
+   --user-5: #e64980;
+   --user-6: #495057;
 
    /* Status Red (Danger) */
    --red-50: #fdedee;

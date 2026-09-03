@@ -677,7 +677,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--avatar-bg, var(--user-color-1));
+  background: var(--avatar-bg, var(--user-1));
   /* 인스턴스가 --avatar-bg로 유저컬러 주입 */
   color: var(--color-text-inverse);
   font-weight: var(--weight-semibold);

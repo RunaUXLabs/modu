@@ -6,7 +6,7 @@ import React from 'react';
 import { MEMBERS, userColorOf } from '../data.js';
 
 /* Avatar — 재사용처: 테스터 바, 채팅 메시지, 현황판, 확정 요약, 주최자 매트릭스
-   색은 멤버 인덱스 기반 round-robin(--user-color-N)으로 주입 → 정체성과 색을 분리 */
+   색은 멤버 인덱스 기반 round-robin(--user-N)으로 주입 → 정체성과 색을 분리 */
 export function Avatar({ id, size = 'md', dimmed = false }) {
   const m = MEMBERS[id];
   return (

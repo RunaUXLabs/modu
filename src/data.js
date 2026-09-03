@@ -19,9 +19,9 @@ export const REQUIRED_IDS = MEMBER_IDS.filter((id) => MEMBERS[id].required);
 export const OPTIONAL_IDS = MEMBER_IDS.filter((id) => !MEMBERS[id].required);
 
 /* 유저 아바타 컬러 — 6색을 인덱스로 round-robin 배정 (정체성 ≠ 색).
-   DS: primitive/user/1~6 · CSS: --user-color-1~6 와 값 동기화. */
+   DS: primitive/user/1~6 · CSS: --user-1~6 와 값 동기화. */
 export const USER_COLORS = ['#3182f6', '#7048e8', '#0ca678', '#f59f00', '#e64980', '#495057'];
-export const userColorVar = (i) => `var(--user-color-${(i % USER_COLORS.length) + 1})`;
+export const userColorVar = (i) => `var(--user-${(i % USER_COLORS.length) + 1})`;
 export const userColorOf = (id) => userColorVar(MEMBER_IDS.indexOf(id));
 
 /* 계층 1 — 시스템이 잠정 확정한 슬롯 */
