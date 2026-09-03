@@ -64,6 +64,12 @@ Source of truth: `src/tokens.css`, `src/styles.css`
 | blue/50 | #e8f3ff | Brand blue 50 / primary weak (`--blue-50`) |
 | blue/300 | #8fb4ff | Brand blue 300 / primary dark (`--blue-300`) |
 | blue/600 | #1b64da | Brand blue 600 / primary action (`--blue-600`) |
+| user/1 | #3182f6 | User avatar palette 1 / round-robin (`--user-1`) |
+| user/2 | #7048e8 | User avatar palette 2 / round-robin (`--user-2`) |
+| user/3 | #0ca678 | User avatar palette 3 / round-robin (`--user-3`) |
+| user/4 | #f59f00 | User avatar palette 4 / round-robin (`--user-4`) |
+| user/5 | #e64980 | User avatar palette 5 / round-robin (`--user-5`) |
+| user/6 | #495057 | User avatar palette 6 / round-robin (`--user-6`) |
 | red/50 | #fdedee | Status red 50 / danger weak (`--red-50`) |
 | red/600 | #cc2b3d | Status red 600 / danger action (`--red-600`) |
 | green/50 | #e6f6ee | Status green 50 / success weak (`--green-50`) |
@@ -114,6 +120,8 @@ Source of truth: `src/tokens.css`, `src/styles.css`
 | overlay | alpha/overlay | alpha/overlay | Push notification overlay surface (`--color-overlay`) |
 | black | slate/black | slate/black | Pure black — phone frame, notch (`--color-black`) |
 | white | gray/white | gray/white | Pure white — titles, inverse text (`--color-white`) |
+
+User avatar colors are primitive-only: no semantic alias is defined. Components inject a chosen primitive through the component-local custom property `--avatar-bg` (not a design token), assigned by index round-robin.
 
 All color values in `src/styles.css` have been tokenized and now reference CSS custom properties defined in `src/tokens.css`. No hardcoded raw color values remain.
 
