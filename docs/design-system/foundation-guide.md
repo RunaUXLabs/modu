@@ -9,7 +9,7 @@
 | [`DESIGN-SYSTEM.md`](../../DESIGN-SYSTEM.md) (루트) | **기계 판독 스펙** — 자사 **md-to-figma** 플러그인이 파싱해 Figma 배리어블·스타일을 생성. 이식하면 그대로 반영된다 | 템플릿 규약을 지킨 토큰 표. 규약을 깨는 편집 금지 |
 | **이 문서** `foundation-guide.md` | **사람용 해설** | 2계층 구조, CSS↔Figma 매핑 규칙, 토큰 용도·대비율, 직접 사용값 노트, 동기화 메모 |
 
-- **값의 정본**: `src/tokens.css` → `DESIGN-SYSTEM.md`. 이 문서의 표는 **읽기 편의용 미러**이며, 불일치하면 정본이 우선한다.
+- **값의 정본**: `src/tokens/tokens.css` → `DESIGN-SYSTEM.md`. 이 문서의 표는 **읽기 편의용 미러**이며, 불일치하면 정본이 우선한다.
 - **반영 순서**: `tokens.css` 수정 → `DESIGN-SYSTEM.md` 갱신 → md-to-figma로 이식 → (필요 시) 이 가이드 미러 갱신.
 - 동기화 산출물(역-export 로그): `figma-scripts/EXPORTED-DESIGN(user).md`
 

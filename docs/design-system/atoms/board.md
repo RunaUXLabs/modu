@@ -16,11 +16,15 @@
 ```
 CSS: `.board`(surface-sub·radius-md) · `.board b`(강조) · `.board__deadline`(text-weak)
 
+## 서비스와 패키지 경계
+
+위 div 발췌는 현재 서비스 bubbles.jsx의 인라인 구현이다. 서비스는 아직 패키지 Board를 사용하지 않는다. 패키지 Board는 waiting/suffix/deadline/onClick을 필수로 받으며 button으로 렌더링해 키보드 클릭을 지원한다. 멤버 이름에는 MembersProvider가 필요하다. 마감·침묵 처리 규칙은 Board가 아니라 서비스 store에서 결정한다.
+
 ## 토큰
 `--color-surface-sub/primary-weak`(hover), `--color-text-sub/text/text-weak`, `--radius-md`, `--text-sm`
 
 ## Figma 매핑
-`ChatRoom/Board` · TEXT prop **Names·Deadline**
+2026-10-14 확인: `Board` (44:237) · TEXT **Names/Deadline**. React의 이름 배열과 문장 suffix를 Figma의 편집 문장과 구분한다.
 
 ## Uses / Used by
 - **Uses**: [NameFlow](./name-flow.md)

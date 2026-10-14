@@ -21,8 +21,8 @@
 ```
 
 ## Figma 매핑
-`Shell/ChatChrome` · TEXT **Title·Count** · BOOLEAN **Show pinbar·Show push** · INSTANCE_SWAP **Body**(slot)
+2026-10-14 확인: `Shell/ChatChrome` (61:307) · TEXT **Title/Count** · BOOLEAN **Show pinbar/Show push** · SLOT **Slot 2**. 기존 INSTANCE_SWAP Body 설명은 정정한다. 서비스 ChatRoom은 store에서 내용을 계산하며 별도 ShellChatChrome 패키지 컴포넌트는 없다.
 
 ## Uses / Used by
 - **Uses**: [Icons](../atoms/icons.md), pinbar/push/input(인라인), Body(slot ← 채팅 스레드/버블), [Sheet](./sheet-respond.md)
-- **Used by**: [Shell/Phone](./shell-phone.md) Screen
+- **Used by**: Figma [Shell/Phone](./shell-phone.md)의 화면 슬롯. 서비스는 ChatRoom이 phone과 chat 구조를 함께 렌더링한다.

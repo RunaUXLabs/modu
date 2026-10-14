@@ -1,7 +1,7 @@
 # SlotCard
 > 회의 시간 슬롯 카드. **하나의 컴포넌트가 3맥락에서 재사용**된다 — `hero`(잠정확정), `tally`(조율 집계), `respond`(응답 입력).
 
-**Tier** Molecule · **Figma** `ChatRoom/SlotCard` · **Source** `src/components/SlotCard.jsx`
+**Tier** Molecule · **Figma** `SlotCard` (52:165) · **서비스** `modu/src/components/SlotCard.jsx` 재export · **패키지** `src/components/molecules/SlotCard.tsx`
 
 ## 언제 쓰나
 - `hero`: 잠정 확정/확정 버블에서 확정 슬롯을 크게.
@@ -19,15 +19,17 @@
 |---|---|---|---|
 | `slot` | `{day,date,time,room}` | — (필수) | 슬롯 데이터 |
 | `variant` | `'hero'`\|`'tally'`\|`'respond'` | `'tally'` | 맥락 |
-| `okCount` | number | — | (tally) 가능 인원 |
-| `total` | number | — | (tally) 게이지 분모 |
+| `okCount` | number | — | tally 필수. 가능 인원 |
+| `total` | number | — | tally 필수. 게이지 분모 |
 | `myValue` | `'ok'`\|`'hard'`\|undefined | — | (tally/respond) 내 응답 |
 | `best` | boolean | `false` | (tally) '지금 1순위' 플래그 |
 | `preset` | boolean | `false` | (respond) 캘린더 제안값(확인 필요, 점선) |
-| `onChange` | fn | — | (respond) 응답 변경 |
+| `onChange` | fn(ok/hard) | — | respond 필수. 응답 변경 |
 | `onClick` | fn | — | (tally) 카드 탭 → 응답 시트 |
 
-## 코드 (현재 구현)
+패키지는 variant별 discriminated union이다. hero에는 slot, respond에는 slot/onChange, tally에는 slot/okCount/total이 필수다. respond의 myValue는 부모가 갱신해야 선택 표시가 바뀐다. 슬롯 선정·응답 집계·best 결정은 서비스 책임이다. total=0이면 게이지 0%, okCount=0이면 응답 수집 중 문구를 표시한다.
+
+## 코드 (구조 발췌)
 ```jsx
 if (variant === 'hero') return (
   <div className="slotcard slotcard--hero">
@@ -67,7 +69,8 @@ return (
 `--color-primary-weak`(hero/게이지), `--color-primary`, `--color-surface-sub`, `--color-line`, `--color-text`/`--color-text-sub`, `--radius-md`, `--shadow-card`, `--text-lg/md/sm`
 
 ## Figma 매핑
-- `ChatRoom/SlotCard` · Variant **hero/tally/respond** · TEXT prop **Day/Date/Time/Room/Gauge**
+- 2026-10-14 확인: `SlotCard`에는 Variant=hero/tally/respond와 별도 이름 escalation 자식이 있다. 속성 정의 조회는 'Component set has existing errors'로 실패하여 TEXT Day/Date/Time/Room/Gauge를 현재 공개 속성이라고 확정할 수 없다.
+- 서비스 escalation은 Sheet의 `.sheet__escalation` 영역이다. 공개 SlotCard의 네 번째 variant가 아니다. Figma set 오류 원인은 편집기에서 추가 확인한다.
 - 내부 재활용: [Chip](../atoms/chip.md)(내 상태·플래그), [SegButton](../atoms/seg-button.md)(respond)
 
 ## Uses / Used by

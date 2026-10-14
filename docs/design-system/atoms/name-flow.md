@@ -5,7 +5,7 @@
 
 ## 설계 의도 (왜 이렇게 만들었나)
 - **명단을 '목록'이 아니라 '문장'으로**: 대기자/불참자를 자연어로 부드럽게 전달(딱딱한 리스트 회피). 이름만 볼드로 스캔 가능.
-- 컴포넌트가 아니라 텍스트 조각이라, Figma에선 Board/Notice의 볼드 텍스트로 표현.
+- React에서는 독립 컴포넌트지만 Figma에는 별도 component 정의 없이 Board/Notice의 볼드 텍스트로 표현한다.
 
 ## React API
 | prop | type | 설명 |
@@ -13,7 +13,7 @@
 | `ids` | string[] | 이름 낼 멤버 id 배열(빈 배열이면 null) |
 | `suffix` | node | 뒤에 붙는 문구(예: "님의 확인이 꼭 필요해요") |
 
-## 코드 (현재 구현)
+## 코드 (이관 전 서비스 발췌)
 ```jsx
 export function NameFlow({ ids, suffix }) {
   if (!ids.length) return null;
@@ -21,6 +21,8 @@ export function NameFlow({ ids, suffix }) {
 }
 ```
 CSS: `.nameflow b`(semibold)
+
+현재 서비스는 패키지 NameFlow를 재export하여 사용한다. 패키지는 MembersProvider에서 멤버 이름을 읽으며 ids는 readonly 배열도 허용한다. 위 MEMBERS 직접 참조는 분리 전 방식이다. 빈 배열이면 null이며 배열 순서와 suffix를 그대로 사용한다.
 
 ## 사용 예시
 ```jsx

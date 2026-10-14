@@ -14,7 +14,7 @@
 | `onChange` | fn(v) | — | 변경 콜백 |
 | `disabled` | boolean | — | 비활성(opacity 0.5) |
 
-## 코드 (현재 구현)
+## 코드 (이관 전 서비스 구조 발췌)
 ```jsx
 export function SegButton({ value, onChange, disabled }) {
   return (
@@ -26,6 +26,8 @@ export function SegButton({ value, onChange, disabled }) {
 }
 ```
 CSS: `.seg`(surface·보더·radius-sm·overflow hidden) · `.seg__item` · `--ok/--hard` · `.seg--disabled`
+
+현재 패키지 `src/components/atoms/SegButton.tsx`는 controlled API를 유지하면서 radio/aria-checked, native disabled, roving tabindex를 보완했다. 화살표는 두 선택지를 전환하며 Home=가능, End=어려움으로 focus와 callback을 이동한다. 부모가 value를 갱신해야 선택 표시가 변경된다. aria-label 기본값은 '참석 가능 여부'다. 이는 패키지 접근성 보완이며 이관 전 서비스 발췌에 이미 구현되어 있다는 뜻이 아니다.
 
 ## 사용 예시
 ```jsx

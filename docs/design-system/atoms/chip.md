@@ -19,7 +19,7 @@ export function Chip({ tone = 'neutral', children }) {
   return <span className={`chip chip--${tone}`}>{children}</span>;
 }
 ```
-CSS: `.chip` · `.chip--neutral/primary/danger/success` (neutral만 보더)
+CSS: `.chip` · `.chip--neutral/primary/danger/success/warn` (neutral만 보더). warn은 기존 CSS와 동일하게 `--color-warn-weak` 배경과 `--color-warn-text` 텍스트를 사용한다.
 
 ## 사용 예시
 ```jsx
@@ -32,7 +32,9 @@ CSS: `.chip` · `.chip--neutral/primary/danger/success` (neutral만 보더)
 `--color-surface-sub/primary-weak/danger-weak/success-weak`, 대응 텍스트색, `--radius-full`, `--text-xs`, `--weight-semibold`, `--color-line`(neutral 보더)
 
 ## Figma 매핑
-`Common/Chip` base(neutral) + `styleChip('neutral|primary|danger|success')` · TEXT prop **Label**
+`Common/Chip` (110:1252) · Size **md/sm** · TEXT **Label**. tone은 인스턴스 색 오버라이드다. `styleChip`은 과거 매핑 설명이며 현재 유틸 호출을 확인한 것이 아니다.
+
+md는 padding 4/8, text 12/600으로 서비스 Chip과 대응한다. Figma sm은 20×20이다. 서비스 Matrix의 필/선은 Chip이 아닌 `.matrix__role`로 렌더링하며 패키지 Chip에는 size prop이 없다. Figma sm을 이유로 Chip API가 누락됐다고 판단하지 않는다.
 
 ## Uses / Used by
 - **Uses**: —

@@ -1,11 +1,11 @@
 # Shell/Phone
-> 기기 프레임(iPhone 16 Pro, 402×874). 얇은 베젤 + Dynamic Island + Screen 슬롯.
+> 서비스 데모의 기기 프레임(402×874). 베젤 + 상단 노치 + 화면/시트 슬롯.
 
 **Tier** Organism(셸) · **Figma** `Shell/Phone` · **Source** 앱 `.phone`(App/ChatRoom)
 
 ## 설계 의도 (왜 이렇게 만들었나)
-- **최신 플래그십 비율(2.17:1)**로 현실감. 베젤 5px·Dynamic Island·살짝 각진 코너(38)로 구형 느낌 제거(과도한 라운드=올드).
-- **Screen을 slot(INSTANCE_SWAP)**으로: 어떤 화면이든 기기 안에 꽂아 보게 — Figma에서 기기/화면 관심사 분리.
+- 서비스 CSS는 402×874, 베젤 5px, radius 38px을 사용한다. 코드 수치만으로 특정 기기 모델이나 '최신'이라는 제품 속성을 보장하지 않는다.
+- Figma는 SLOT으로 화면과 시트 콘텐츠를 삽입한다. 별도 INSTANCE_SWAP 속성이나 React ShellPhone API가 구현됐다고 간주하지 않는다.
 - `.phone`은 `position:relative + overflow:hidden` → 바텀 시트 dim을 폰 안에 가둠(뷰포트 오염 방지).
 
 ## 코드 (CSS 핵심)
@@ -15,7 +15,7 @@
 ```
 
 ## Figma 매핑
-`Shell/Phone` · INSTANCE_SWAP **Screen**(slot) · Dynamic Island
+2026-10-14 확인: `Shell/Phone` (61:303) · SLOT **Slot__main/Slot__sheet**. 서비스는 ChatRoom의 div.phone과 Sheet 자식 구조이며 패키지 export는 없다.
 
 ## Uses / Used by
 - **Uses(slot)**: [Shell/ChatChrome](./shell-chatchrome.md)

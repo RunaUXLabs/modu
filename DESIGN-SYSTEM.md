@@ -27,13 +27,13 @@
 - 예: ### Display 아래 xl -> display/xl
 -->
 
-Source of truth: `src/tokens.css`, `src/styles.css`
+Source of truth: `src/design-system/tokens/tokens.css`, `src/design-system/styles.css`
 
 이 문서는 코드에 정의된 디자인 시스템 값을 기록한다.
-`src/tokens.css`의 CSS 커스텀 프로퍼티는 문법 제약상 하이픈(`--gray-100`, `--color-surface-sub-dark`)으로 선언되어 있지만, 이 문서는 Figma 배리어블로 가져오기 위한 파일이므로 템플릿 컨벤션에 맞춰 `/`를 그룹 구분자로 사용해 폴더 구조를 만든다.
-매핑 규칙: (1) Primitive는 `src/tokens.css`의 주석 그룹명(gray, slate, blue, red, green, amber, alpha)을 상위 폴더로 쓰고 색상 고유값을 하위로 붙인다 (예: `--gray-100` -> `gray/100`, 이름이 없는 `white`/`black`은 각각 소속 그룹의 `gray/white`, `slate/black`). (2) Semantic은 하이픈을 그대로 `/`로 바꾼다 (예: `--color-surface-sub-dark` -> `surface/sub/dark`). 어떤 토큰의 경로가 다른 토큰의 상위 폴더와 겹치면(Figma는 같은 이름이 폴더이자 값일 수 없음) `/default`를 붙여 리프로 분리한다 — 최상위 그룹뿐 아니라 중첩된 경우에도 동일하게 적용한다 (예: `bg` -> `bg/default`, `surface-sub`는 `surface-sub-dark`와 경로가 겹치므로 `surface/sub/default`, `warn-text`는 `warn-text-strong`과 겹치므로 `warn/text/default`). `dim`, `overlay`, `black`, `white`처럼 다른 토큰과 경로를 공유하지 않는 단독 토큰은 그대로 둔다.
+`src/design-system/tokens/tokens.css`의 CSS 커스텀 프로퍼티는 문법 제약상 하이픈(`--gray-100`, `--color-surface-sub-dark`)으로 선언되어 있지만, 이 문서는 Figma 배리어블로 가져오기 위한 파일이므로 템플릿 컨벤션에 맞춰 `/`를 그룹 구분자로 사용해 폴더 구조를 만든다.
+매핑 규칙: (1) Primitive는 `src/design-system/tokens/tokens.css`의 주석 그룹명(gray, slate, blue, red, green, amber, alpha)을 상위 폴더로 쓰고 색상 고유값을 하위로 붙인다 (예: `--gray-100` -> `gray/100`, 이름이 없는 `white`/`black`은 각각 소속 그룹의 `gray/white`, `slate/black`). (2) Semantic은 하이픈을 그대로 `/`로 바꾼다 (예: `--color-surface-sub-dark` -> `surface/sub/dark`). 어떤 토큰의 경로가 다른 토큰의 상위 폴더와 겹치면(Figma는 같은 이름이 폴더이자 값일 수 없음) `/default`를 붙여 리프로 분리한다 — 최상위 그룹뿐 아니라 중첩된 경우에도 동일하게 적용한다 (예: `bg` -> `bg/default`, `surface-sub`는 `surface-sub-dark`와 경로가 겹치므로 `surface/sub/default`, `warn-text`는 `warn-text-strong`과 겹치므로 `warn/text/default`). `dim`, `overlay`, `black`, `white`처럼 다른 토큰과 경로를 공유하지 않는 단독 토큰은 그대로 둔다.
 코드가 항상 source of truth이며, 이 문서의 `/` 표기는 어떤 CSS 변수에서 왔는지 위 규칙으로 항상 역추적 가능하다.
-`src/styles.css`에서 CSS 커스텀 프로퍼티를 사용하지 않는 값은 토큰 표가 아닌 별도 노트로 기록한다.
+`src/design-system/styles.css`에서 CSS 커스텀 프로퍼티를 사용하지 않는 값은 토큰 표가 아닌 별도 노트로 기록한다.
 
 ## Colors
 
@@ -123,7 +123,7 @@ Source of truth: `src/tokens.css`, `src/styles.css`
 
 User avatar colors are primitive-only: no semantic alias is defined. Components inject a chosen primitive through the component-local custom property `--avatar-bg` (not a design token), assigned by index round-robin.
 
-All color values in `src/styles.css` have been tokenized and now reference CSS custom properties defined in `src/tokens.css`. No hardcoded raw color values remain.
+All color values in `src/design-system/styles.css` have been tokenized and now reference CSS custom properties defined in `src/design-system/tokens/tokens.css`. No hardcoded raw color values remain.
 
 ## Spacing
 
@@ -140,9 +140,9 @@ All color values in `src/styles.css` have been tokenized and now reference CSS c
 
 ### Semantic
 
-No semantic spacing alias tokens are defined in `src/tokens.css`.
+No semantic spacing alias tokens are defined in `src/design-system/tokens/tokens.css`.
 
-Direct CSS spacing notes: additional layout values such as `1px`, `2px`, `3px`, `5px 10px`, `8px 12px`, `390px`, `720px`, and `780px` are used directly in `src/styles.css` and are not design tokens.
+Direct CSS spacing notes: additional layout values such as `1px`, `2px`, `3px`, `5px 10px`, `8px 12px`, `390px`, `720px`, and `780px` are used directly in `src/design-system/styles.css` and are not design tokens.
 
 ## Radius
 
@@ -157,9 +157,9 @@ Direct CSS spacing notes: additional layout values such as `1px`, `2px`, `3px`, 
 
 ### Semantic
 
-No semantic radius alias tokens are defined in `src/tokens.css`.
+No semantic radius alias tokens are defined in `src/design-system/tokens/tokens.css`.
 
-Direct CSS radius notes: `4px`, `8px solid #000`, `20px`, `24px`, `28px`, `32px`, and `40px` are used directly in `src/styles.css` and are not design tokens.
+Direct CSS radius notes: `4px`, `8px solid #000`, `20px`, `24px`, `28px`, `32px`, and `40px` are used directly in `src/design-system/styles.css` and are not design tokens.
 
 ## Typography
 
@@ -173,7 +173,7 @@ Direct CSS radius notes: `4px`, `8px solid #000`, `20px`, `24px`, `28px`, `32px`
 | text-lg | Pretendard Variable | 18px | 700 | 130% | 0px |
 | text-xl | Pretendard Variable | 24px | 700 | 130% | 0px |
 
-Typography source notes: `--font-family`, `--leading-tight`, `--leading-base`, `--weight-regular`, `--weight-medium`, `--weight-semibold`, and `--weight-bold` exist in `src/tokens.css`. The typography style rows above keep the original text token names with only `--` removed.
+Typography source notes: `--font-family`, `--leading-tight`, `--leading-base`, `--weight-regular`, `--weight-medium`, `--weight-semibold`, and `--weight-bold` exist in `src/design-system/tokens/tokens.css`. The typography style rows above keep the original text token names with only `--` removed.
 
 ## Effects
 
@@ -183,19 +183,19 @@ Typography source notes: `--font-family`, `--leading-tight`, `--leading-base`, `
 | shadow-sheet | drop-shadow | rgba(0,0,0,0.12) | 0 | -8px | 24px | 0 |
 | shadow-banner | drop-shadow | rgba(0,0,0,0.16) | 0 | 4px | 16px | 0 |
 
-Direct CSS effect notes: `0 24px 64px rgba(0,0,0,0.5)`, `filter: brightness(1.06)`, opacity values, and the sheet footer gradient are used directly in `src/styles.css` and are not effect tokens.
+Direct CSS effect notes: `0 24px 64px rgba(0,0,0,0.5)`, `filter: brightness(1.06)`, opacity values, and the sheet footer gradient are used directly in `src/design-system/styles.css` and are not effect tokens.
 
 ## Motion
 
-Motion tokens in `src/tokens.css`: `ease-out` is `cubic-bezier(0.22, 1, 0.36, 1)`, `duration-fast` is `150ms`, and `duration-base` is `250ms`.
+Motion tokens in `src/design-system/tokens/tokens.css`: `ease-out` is `cubic-bezier(0.22, 1, 0.36, 1)`, `duration-fast` is `150ms`, and `duration-base` is `250ms`.
 They are documented as notes because the provided template does not include a Motion table.
 
 ## Grid
 
-No grid tokens are defined in `src/tokens.css`.
+No grid tokens are defined in `src/design-system/tokens/tokens.css`.
 
-Direct CSS grid notes: layout values such as `repeat(3, 1fr)`, `auto 1fr auto auto`, `max-width: 82%`, `max-width: 92%`, and `max-height: 86%` are used directly in `src/styles.css` and are not grid tokens.
+Direct CSS grid notes: layout values such as `repeat(3, 1fr)`, `auto 1fr auto auto`, `max-width: 82%`, `max-width: 92%`, and `max-height: 86%` are used directly in `src/design-system/styles.css` and are not grid tokens.
 
 ## Components
 
-Component usage is defined in `src/styles.css`. Component mappings are intentionally not written as tables so the MD to Figma plugin only parses the template-supported token and style sections.
+Component usage is defined in `src/design-system/styles.css`. Component mappings are intentionally not written as tables so the MD to Figma plugin only parses the template-supported token and style sections.
