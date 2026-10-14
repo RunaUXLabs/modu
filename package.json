@@ -12,7 +12,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "storybook": "storybook dev -p 6006 --no-open",
+    "typecheck:storybook": "tsc -p tsconfig.storybook.json --noEmit",
+    "build:storybook": "tsc -p tsconfig.storybook.json --noEmit && storybook build -o storybook-static",
+    "test": "vitest run",
+    "test:service-stories": "vitest run --config vitest.service.config.ts"
   },
   "dependencies": {
     "react": "^18.3.1",

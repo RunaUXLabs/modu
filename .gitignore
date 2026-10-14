@@ -4,3 +4,8 @@ dist
 *.local
 .agents
 figma-scripts
+
+storybook-static
+
+# Archive from the previous package workflow; the service uses internal sources.
+/vendor/
