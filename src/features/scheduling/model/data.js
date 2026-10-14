@@ -1,9 +1,28 @@
-/* ============================================================
-   시나리오 데이터 — 앱 내 '오늘'은 2026-07-09(목)로 고정.
-   테스터가 언제 열어도 깨지지 않도록 실제 시계와 분리한다.
-   ============================================================ */
+/* 실행 시점의 로컬 날짜를 기준으로 다음 주 회의 시나리오를 구성한다. */
+export function createScenarioDates(today = new Date()) {
+  const base = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const addDays = (date, days) => {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  };
+  const monday = addDays(base, 8 - (base.getDay() || 7));
+  const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+  const short = (date) => `${date.getMonth() + 1}/${date.getDate()}(${weekdays[date.getDay()]})`;
+  const long = (date) => `${date.getMonth() + 1}월 ${date.getDate()}일`;
+  const period = (start) => `${short(start)} – ${short(addDays(start, 4))}`;
+  // 주말에도 응답 마감이 과거 날짜가 되지 않도록 한다.
+  const deadline = new Date(Math.max(addDays(base, 1).getTime(), addDays(monday, -3).getTime()));
+  return {
+    todayLabel: `${base.getFullYear()}년 ${long(base)} ${weekdays[base.getDay()]}요일`,
+    periods: [period(monday), period(addDays(monday, 7))],
+    deadlines: [`${short(deadline)} 18:00`, `${short(monday)} 10:00`],
+    slotDates: [0, 1, 3, 4, 7, 9].map((offset) => long(addDays(monday, offset))),
+  };
+}
 
-export const TODAY_LABEL = '2026년 7월 9일 목요일';
+const scenarioDates = createScenarioDates();
+export const TODAY_LABEL = scenarioDates.todayLabel;
 
 export const MEMBERS = {
   runa: { id: 'runa', name: '루나', role: 'host', required: true, desc: '주최자 · 필참' },
@@ -28,22 +47,22 @@ export const userColorOf = (id) => userColorVar(MEMBER_IDS.indexOf(id));
 export const PROPOSAL_SLOT = {
   id: 'tue13',
   day: '화요일',
-  date: '7월 14일',
+  date: scenarioDates.slotDates[1],
   time: '13:00 – 14:00',
   room: '회의룸 A',
 };
 
 /* 계층 2 — 조율 모드 후보 슬롯 (화 13:00 이의로 제외, 수요일은 마라 외근으로 소거) */
 export const COORD_SLOTS = [
-  { id: 'mon16', day: '월요일', date: '7월 13일', time: '16:00 – 17:00', room: '회의룸 B' },
-  { id: 'thu15', day: '목요일', date: '7월 16일', time: '15:00 – 16:00', room: '회의룸 A' },
-  { id: 'fri10', day: '금요일', date: '7월 17일', time: '10:00 – 11:00', room: '회의룸 C' },
+  { id: 'mon16', day: '월요일', date: scenarioDates.slotDates[0], time: '16:00 – 17:00', room: '회의룸 B' },
+  { id: 'thu15', day: '목요일', date: scenarioDates.slotDates[2], time: '15:00 – 16:00', room: '회의룸 A' },
+  { id: 'fri10', day: '금요일', date: scenarioDates.slotDates[3], time: '10:00 – 11:00', room: '회의룸 C' },
 ];
 
 /* 교집합 붕괴 시 '기간 넓히기'로 재산출되는 슬롯 (다다음 주) */
 export const WIDENED_SLOTS = [
-  { id: 'n_mon10', day: '월요일', date: '7월 20일', time: '10:00 – 11:00', room: '회의룸 A' },
-  { id: 'n_wed14', day: '수요일', date: '7월 22일', time: '14:00 – 15:00', room: '회의룸 B' },
+  { id: 'n_mon10', day: '월요일', date: scenarioDates.slotDates[4], time: '10:00 – 11:00', room: '회의룸 A' },
+  { id: 'n_wed14', day: '수요일', date: scenarioDates.slotDates[5], time: '14:00 – 15:00', room: '회의룸 B' },
 ];
 
 /* 캘린더 연동 프리셋 — '확정'이 아닌 '제안'. 응답 시트에 미리 채워지고 확인 탭을 요구한다 (FGI F8) */
@@ -104,8 +123,8 @@ export const HINTS = {
 export const MEETING_DEFAULT = {
   title: '다음 주 개선안 회의',
   duration: '1시간',
-  period: '7/13(월) – 7/17(금)',
-  deadline: '7/10(금) 18:00',
+  period: scenarioDates.periods[0],
+  deadline: scenarioDates.deadlines[0],
 };
 
 export const MEETING_FIELDS = [
@@ -126,15 +145,15 @@ export const MEETING_FIELDS = [
     key: 'period',
     label: '기간',
     type: 'select',
-    options: ['7/13(월) – 7/17(금)', '7/20(월) – 7/24(금)'],
+    options: scenarioDates.periods,
     source: '“다음 주”라고 하셔서 다음 주 평일로 잡았어요',
   },
   {
     key: 'deadline',
     label: '응답 마감',
     type: 'select',
-    options: ['7/10(금) 18:00', '7/13(월) 10:00'],
-    source: '회의 전날까지 하루 여유가 남도록 정했어요',
+    options: scenarioDates.deadlines,
+    source: '다음 주 회의 전에 응답할 수 있도록 정했어요',
   },
 ];
 
