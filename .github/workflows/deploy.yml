@@ -18,15 +18,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install
-      - run: pnpm build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:pages
       - uses: actions/configure-pages@v5
         with:
           enablement: true # Pages 미활성 저장소에서도 자동 활성화
